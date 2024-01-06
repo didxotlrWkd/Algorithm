@@ -1,35 +1,60 @@
 from collections import deque
 
-def bfs (graph , node , visited):
-    queue = deque([node])
-    visited[node] = True
-    
+#그래프가 딕셔너리 형태일때
+def bfs_dict(start_node, graph):
+    queue = deque([start_node])
+    visited = set([start_node])
+
     while queue:
-        v = queue.popleft()
-        print(v , end = ' ')
-        
-        for i in graph[v]:
-            if not (visited[i]):
-                queue.append(i)
-                visited[i] = True    
-    
-    
+        curr_node = queue.popleft()
+        if curr_node == 'C':
+            return curr_node
 
+        for next_node in graph[curr_node]:
+            if next_node not in visited:
+                visited.add(next_node)
+                queue.append(next_node)
+    return -1
+
+graph_dict = {
+        'A': ['B', 'C'],
+        'B': ['D', 'E'],
+        'C': ['F'],
+        'D': ['G'],
+        'E': ['F'],
+        'F': [],
+        'G': []
+}
+
+bfs_dict('A',graph_dict)
+
+#그래프가 2차원 배열일때
+def bfs_2dArray(start_x, start_y, graph):
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
     
-graph = [
-    [],
-    [2, 3],
-    [1, 8],
-    [1, 4, 5],
-    [3, 5],
-    [3, 4],
-    [7, 8],
-    [6, 8],
-    [2, 6, 7]
-] 
+    queue = deque([(start_x, start_y)])
+    visited = set([(start_x, start_y)])
 
-# 노드별로 방문 정보를 리스트로 표현
-visited = [False] * 9
+    while queue:
+        x, y = queue.popleft()
+        print(x,y)
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
 
-# 정의한 BFS 메서드 호출(노드 1을 탐색 시작 노드로 설정)
-bfs(graph, 1, visited)
+            if 0 <= nx < len(graph) and 0 <= ny < len(graph[0]):
+                if (nx, ny) not in visited:
+                    visited.add((nx, ny))
+                    queue.append((nx, ny))
+    return -1
+
+graph_2dArray = [
+        ['O', 'O', 'O', 'O', 'O', 'X'],
+        ['O', 'O', 'O', 'O', 'X', 'O'],
+        ['O', 'O', 'O', 'X', 'O', 'O'],
+        ['O', 'O', 'X', 'O', 'O', 'O'],
+        ['X', 'O', 'O', 'O', 'O', 'O'],
+]
+
+bfs_2dArray(0,0,graph_2dArray)
