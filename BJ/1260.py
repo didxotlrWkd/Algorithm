@@ -24,9 +24,13 @@ for i in graph.values():
 visited_dfs = set()
     
 def dfs(node):
+    
     if node not in visited_dfs:
         print(node, end=' ')
         visited_dfs.add(node)
+        if node not in graph:
+            return
+        
         for neighbor in graph[node]:
             dfs(neighbor)
             
@@ -40,10 +44,14 @@ def bfs(v):
         
         curr_node = queue.popleft()
         print(curr_node, end=' ')
+        if curr_node not in graph:
+            return
+        
         for i in graph[curr_node]:
             if i not in visited:
                 queue.append(i)
                 visited.add(i)
                     
-print('')                
+print('')               
+ 
 bfs(V)
