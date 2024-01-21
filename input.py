@@ -22,3 +22,11 @@ two_dimensional_array = [list(map(int, input().split())) for _ in range(k)]
 #k개의 문자열들을 입력받기
 
 words = [input().strip() for _ in range(k)]
+
+#N행의 입력값을 1차원 리스트에 저장
+N  = map(int, input().split())
+land = []
+
+for _ in range(N):
+    input_line = map(int, input().split())
+    land.extend(input_line)
