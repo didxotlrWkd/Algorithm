@@ -1,6 +1,7 @@
 
-sum = 0
-for i in range(1,21):
-    sum += i
 
-print(sum)
+land = [[1,2,3] , [-2 , 4, -1] , [2 , 2, 2]]
+result = 0
+result = max(result, max(land))
+
+print(result)
