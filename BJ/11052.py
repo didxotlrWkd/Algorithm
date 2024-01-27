@@ -1,0 +1,15 @@
+import sys
+
+input = sys.stdin.readline
+
+N = int(input())
+
+card = [0] + list(map(int,input().split()))
+dp = [0]
+
+for i in range(1, N+1):
+    dp.append(card[i])
+    for j in range(1 , i + 1):
+        dp[i] = max(dp[i] , dp[i-j] + card[j])
+        
+print(dp[N])
