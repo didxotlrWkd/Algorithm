@@ -24,6 +24,6 @@ def back():
             back()
             per.pop()
             visited[i] = False
-    
+     
     
 back()
